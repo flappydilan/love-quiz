@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon-512.png" />
+  <meta name="theme-color" content="#ff69b4" />
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log("SW registered"))
+        .catch(err => console.error("SW registration failed", err));
+    }
+  </script>
+  <title>Our Love Quiz 💖</title>
+  <style>
+    :root {
+      --lilac: #c8a2c8;
+      --lilac-dark: #a279a2;
+      --white: #ffffff;
+      --gray: #444;
+    }
+  
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+  
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #f8f0ff, #e4d4f4);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      color: var(--gray);
+    }
+  
+    #quiz-box {
+      background: var(--white);
+      padding: 3rem 2rem;
+      border-radius: 24px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
+  
+    h1 {
+      color: var(--lilac-dark);
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+  
+    #question {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      font-weight: 600;
+      color: #333;
+    }
+  
+    button {
+      display: block;
+      width: 100%;
+      margin: 0.75rem 0;
+      padding: 16px 20px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      background-color: var(--lilac);
+      color: white;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+  
+    button:hover {
+      background-color: var(--lilac-dark);
+    }
+  
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  
+    #result {
+      font-size: 1.2rem;
+      margin-top: 1.5rem;
+      font-weight: 500;
+      min-height: 2em;
+    }
+  
+    img {
+      margin: 1.5rem auto;
+      border-radius: 14px;
+      max-width: 100%;
+      max-height: 350px;
+      object-fit: cover;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+  
+    @media (max-width: 600px) {
+      #quiz-box {
+        padding: 2rem 1.5rem;
+      }
+  
+      h1 {
+        font-size: 2rem;
+      }
+  
+      #question {
+        font-size: 1.3rem;
+      }
+  
+      button {
+        font-size: 1rem;
+        padding: 14px;
+      }
+    }
+    #videoPlayer {
+      display: none;
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+    }
+    body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #1e085d, #3e0b86);
+  color: black;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  flex-direction: column;
+}
+
+body h1 {
+  color: white;
+}
+#start-screen {
+  color: white;
+}
+.card {
+  background: #24104f;
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+}
+
+.hero-img {
+  width: 200px;
+  margin: 1rem auto;
+  display: block;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 1rem 1.5rem;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background: #00f5d4;
+  color: #000;
+}
+
+.btn-secondary {
+  background: #c8a2c8;
+  color: #000;
+}
+
+#options button {
+  display: block;
+  background: #311e78;
+  border: 2px solid #6e44ff;
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#options button:hover {
+  background: #6e44ff;
+}
+  </style>
+
+</head>
+
+<body id="documentBody">
+  <h1>💖 Our Love Quiz 💖</h1>
+  
+  <!-- 🌸 START PAGE -->
+  <div id="start-screen">
+    <h2>Güzelim! 💜</h2>
+    <p>
+      Birkaç soru cevaplayabilir misin :) 
+    </p>
+    <button id="start-btn">Start Quiz</button>
+  </div>
+  
+  <!-- 🧠 QUIZ CONTENT -->
+  <div id="quiz-box" style="display:none;">
+    <h2 id="question">Loading...</h2>
+    <div id="options"></div>
+    <p id="result"></p>
+    <button id="next-btn" style="display:none">Next</button>
+  </div>
+  
+  <div id="videoPlayer">
+    <video width="100%" height="100%" controls>
+      <source src="/images/video.mp4" type="video/mp4">
+    </video>
+  </div>
+  
+  
+  <script src="quiz.js"></script>
+</body>
+
+
+</html>

@@ -160,14 +160,6 @@ const quizData = [
     message: "Doluysa 2 ama genelde 3. banktı",
     image: "images/soru17.jpeg",
   },
-  {
-    question:
-      "Yenişehirde seni işten almaya geldiğimde kaçıncı banka oturuyorduk?",
-    options: ["1", "2", "3", "4"],
-    answer: "3",
-    message: "Doluysa 2 ama genelde 3. banktı",
-    image: "images/soru17.jpeg",
-  },
 ];
 
 let currentQuestion = 0;

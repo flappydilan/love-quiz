@@ -160,6 +160,14 @@ const quizData = [
     message: "Doluysa 2 ama genelde 3. banktı",
     image: "images/soru17.jpeg",
   },
+   {
+    question:
+      "Seninle olan bir fotoğrafımı ilk kez telefonumun arka planı yaptığımda kullandığım o fotoğraf nerede çekilmişti?",
+    options: ["Kızılaydaki evimin önünde", "Sincandaki evimin önünde", "Yenişehir tren istasyonun yanındaki banklarda", "Göksü parkında"],
+    answer: "Sincandaki evimin önünde",
+    message: "Tabi o zamanlar o evde oturacağımdan habersizdim :).",
+    image: "images/soru18.jpeg",
+  },
 ];
 
 let currentQuestion = 0;
